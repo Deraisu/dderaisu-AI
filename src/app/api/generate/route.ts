@@ -41,7 +41,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ result: output });
   } catch (err: unknown) {
     if (err instanceof Error) {
-      return NextResponse.json({ error: err.message || "Terjadi kesalahan server." }, { status: 500 });
+      return NextResponse.json(
+        { error: `${err.message} Terjadi kesalahan server.` },
+        { status: 500 }
+      );
     }
   }
  }
