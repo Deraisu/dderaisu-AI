@@ -39,7 +39,9 @@ export async function POST(req: Request) {
     const output = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "Tidak ada output.";
 
     return NextResponse.json({ result: output });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message || "Terjadi kesalahan server." }, { status: 500 });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message || "Terjadi kesalahan server." }, { status: 500 });
+    }
   }
-}
+ }
